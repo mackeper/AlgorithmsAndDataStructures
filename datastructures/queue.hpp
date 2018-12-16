@@ -26,10 +26,10 @@ class Queue {
         Queue() : m_size(0), m_first(nullptr), m_last(nullptr) {}
 
         /* Return the number of elements in the queue */
-        size_t size();
+        size_t const size();
 
         /* Check if the queue is empty */
-        bool empty();
+        bool const empty();
 
         /* Add an element to the end of the queue */
         void push(T val);
@@ -45,12 +45,12 @@ class Queue {
 };
 
 template <class T>
-size_t Queue<T>::size() {
+size_t const Queue<T>::size() {
     return this->m_size;
 }
 
 template <class T>
-bool Queue<T>::empty() {
+bool const Queue<T>::empty() {
     return this->size() == 0;
 }
 
