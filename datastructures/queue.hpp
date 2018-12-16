@@ -1,3 +1,5 @@
+#ifndef QUEUE_H_
+#define QUEUE_H_
 #include <cstddef>
 
 /**
@@ -92,3 +94,4 @@ template <class T>
 T& Queue<T>::back() {
     return m_last->val;
 }
+#endif //QUEUE_H_
