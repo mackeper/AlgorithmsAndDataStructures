@@ -4,7 +4,9 @@
     Fenwick trees
     also known as Binary Indexed Trees (BIT)
 
-    Useful for getting the sum of an subset.
+    Useful for getting the sum of an subset
+    and counting inversions.
+    .
     Runtime:
         Create: O(n)
         Compute sum: O(log n)
@@ -27,21 +29,23 @@ private:
     int lowestOneBit(int i);
 
 public:
-    explicit Fenwicktree(int size) //Move outside
-    {
-        m_size = size;
-        m_table = new int[size];
-        for(unsigned int i = 0; i < size; i++) 
-        {
-            m_table[i] = 0;
-        }
-    }
+    explicit Fenwicktree(int size);
 
     size_t size();
     void update(int i, int delta);
     int sum(int i);
     int rangeSum(int i, int j);
 };
+
+Fenwicktree::Fenwicktree(int size)
+{
+    m_size = size;
+    m_table = new int[size];
+    for(unsigned int i = 0; i < size; i++) 
+    {
+        m_table[i] = 0;
+    }
+}
 
 int Fenwicktree::lowestOneBit(int i)
 {
