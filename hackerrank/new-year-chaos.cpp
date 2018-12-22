@@ -1,23 +1,90 @@
-#include <iostream>
-#include <vector>
+#ifndef FENWICKTREE_H_
+#define FENWICKTREE_H_
+/**
+    Fenwick trees
+    also known as Binary Indexed Trees (BIT)
+
+    Useful for getting the sum of an subset.
+    Runtime:
+        Create: O(n)
+        Compute sum: O(log n)
+        Update prefix sums: O(log n)
+
+    Author: Marcus Östling
+*/
+
+#include <cstddef>
+
+namespace malg {
+
+class Fenwicktree {
+private:
+  size_t m_size;
+  int *m_table;
+
+  int lowestOneBit(int i);
+
+public:
+  explicit Fenwicktree(int size) // Move outside
+  {
+    m_size = size;
+    m_table = new int[size];
+    for (unsigned int i = 0; i < size; i++) {
+      m_table[i] = 0;
+    }
+  }
+
+  size_t size();
+  void update(int i, int delta);
+  int sum(int i);
+  int rangeSum(int i, int j);
+};
+
+int Fenwicktree::lowestOneBit(int i) { return i & -i; }
+
+size_t Fenwicktree::size() { return m_size; }
+
+void Fenwicktree::update(int i, int delta) {
+  while (i < m_size) {
+    m_table[i] += delta;
+    i += this->lowestOneBit(i);
+  }
+}
+
+int Fenwicktree::sum(int i) {
+  int sum = 0;
+  while (i > 0) {
+    sum += m_table[i];
+    i -= this->lowestOneBit(i);
+  }
+  return sum;
+}
+
+int Fenwicktree::rangeSum(int i, int j) { return sum(j) - sum(i - 1); }
+
+} // namespace malg
+#endif // FENWICKTREE_H_
+#include <bits/stdc++.h>
 
 using namespace std;
 
+vector<string> split_string(string);
+
+// Complete the minimumBribes function below.
 void minimumBribes(vector<int> q) {
     int total_bribes = 0;
+    malg::Fenwicktree f(q.size()+1);
     for(int i = 0; i < q.size(); i++) {
-        if(q[i] > i + 3) {
-            cout << "Too chaotic\n";
-            return;
-        }
-        for(int j = i+1; j < q.size(); j++) {
-            if(q[j] < q[i])
-                total_bribes++;
-        }
-        cout << i << endl;
+      if(q[i] - (i + 1) > 2) {
+        cout << "Too chaotic" << endl;
+        return;
+      }
+      int bribe_count = f.rangeSum(q[i], q.size());
+      f.update(q[i], 1);
+      total_bribes += bribe_count;
     }
 
-    cout << total_bribes << "\n";
+    cout << total_bribes << endl;
 
 }
 
@@ -27,7 +94,7 @@ int main()
     cin.tie(NULL);
     int t;
     cin >> t;
-    vector<vector<int>> vv(t);
+
     for (int i = 0; i < t; i++) {
         int n;
         cin >> n;
@@ -35,12 +102,9 @@ int main()
 
         for(int j = 0; j < n; j++)
             cin >> q[j];
-        //vv[i] = q;
         minimumBribes(q);
     }
-    //for (int i = 0; i < t; i++) {
-    //    minimumBribes(vv[i]);
-    //}
 
     return 0;
 }
+
