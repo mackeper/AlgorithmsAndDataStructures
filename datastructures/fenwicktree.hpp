@@ -15,6 +15,9 @@
 
 #include <cstddef>
 
+namespace malg
+{
+
 class Fenwicktree 
 {
 private:
@@ -76,4 +79,6 @@ int Fenwicktree::rangeSum(int i, int j)
     return sum(j) - sum(i-1);
 
 }
+
+} // namespace malg
 #endif //FENWICKTREE_H_

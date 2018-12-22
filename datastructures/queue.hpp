@@ -1,6 +1,5 @@
 #ifndef QUEUE_H_
 #define QUEUE_H_
-#include <cstddef>
 
 /**
     Simple FIFO Queue data structure.
@@ -10,6 +9,11 @@
     Author: Marcus Östling
 
 */
+
+namespace malg {
+
+#include <cstddef>
+
 template <class T>
 class Queue {
     private:
@@ -94,4 +98,6 @@ template <class T>
 T& Queue<T>::back() {
     return m_last->val;
 }
+
+} //namespace malg
 #endif //QUEUE_H_
