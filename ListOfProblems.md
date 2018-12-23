@@ -22,3 +22,5 @@ With fenwick: O(log^2 n)
 Given an array and a number k where k is smaller than size of array, we need to find the k’th smallest element in the given array. It is given that ll array elements are distinct.
 
 Simple solution: sort and return element k-1.
+
+https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/
