@@ -13,6 +13,7 @@
         Update prefix sums: O(log n)
 
     Author: Marcus Östling
+    Inspired by: https://www.youtube.com/watch?v=kPaJfAUwViY
 */
 
 #include <cstddef>
