@@ -8,8 +8,8 @@ int main() {
   double qaly = 0;
   double x, y;
   while(n-- > 0) {
-    scanf("%lf %lf", &q, &y);
-    qaly += q*y;
+    scanf("%lf %lf", &x, &y);
+    qaly += x*y;
   }
 
   printf("%lf\n", qaly);

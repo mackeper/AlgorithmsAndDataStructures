@@ -13,6 +13,7 @@ int main() {
     } else if(letter == '-')
       read = true;
   }
+  printf("\n");
   
   return 0;
 }
