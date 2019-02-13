@@ -1,5 +1,11 @@
 # Algorithms
 
+## Dynamic programming
+## digit Dynamic programming
+https://www.geeksforgeeks.org/digit-dp-introduction/
+### Problems
+* https://open.kattis.com/problems/cudak Difficulty: 6.7
+
 ## Longest increasing subsequence
 ### Problems
 * https://kth.kattis.com/problems/longincsubseq Difficulty: 5.2 (Actually implement a fenwick tree) 
