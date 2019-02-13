@@ -1,7 +1,7 @@
 # Algorithms
 
 ## Dynamic programming
-## digit Dynamic programming
+## Digit Dynamic programming
 https://www.geeksforgeeks.org/digit-dp-introduction/
 ### Problems
 * https://open.kattis.com/problems/cudak Difficulty: 6.7
