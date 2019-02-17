@@ -3,7 +3,7 @@
 ## Dynamic programming
 ### Regular DP problems
 * https://open.kattis.com/problems/uxuhulvoting Difficulty 3.4
-* https://kth.kattis.com/problems/adventuremoving4 Difficulty 4.5
+* https://open.kattis.com/problems/adventuremoving4 Difficulty 4.5
 
 ## Digit DP
 https://www.geeksforgeeks.org/digit-dp-introduction/
