@@ -25,4 +25,9 @@ https://cp-algorithms.com/graph/depth-first-search.html
 ### Djikstra
 https://cp-algorithms.com/graph/dijkstra.html
 #### Problems
-* https://kth.kattis.com/problems/george Difficulty: 2.1 (djikstra might be overkill?)
+* https://kth.kattis.com/problems/george Difficulty: 2.1
+
+### Minimum spanning tree
+Kruskal's algorithm
+#### Problems
+* https://open.kattis.com/problems/borg Difficulty 3.9
