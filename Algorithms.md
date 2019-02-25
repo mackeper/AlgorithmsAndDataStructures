@@ -12,7 +12,7 @@ https://www.geeksforgeeks.org/digit-dp-introduction/
 
 ## Longest increasing subsequence
 ### Problems
-* https://kth.kattis.com/problems/longincsubseq Difficulty: 5.2 (Actually implement the algorithm) 
+* https://open.kattis.com/problems/longincsubseq Difficulty: 5.2 (Actually implement the algorithm) 
 * https://open.kattis.com/problems/signals Difficulty: 3.5
 
 ## Graphs
@@ -25,7 +25,8 @@ https://cp-algorithms.com/graph/depth-first-search.html
 ### Djikstra
 https://cp-algorithms.com/graph/dijkstra.html
 #### Problems
-* https://kth.kattis.com/problems/george Difficulty: 2.1
+* https://open.kattis.com/problems/george Difficulty: 2.1
+* https://open.kattis.com/problems/kitchen Difficulty 3.3
 
 ### Minimum spanning tree
 Kruskal's algorithm
