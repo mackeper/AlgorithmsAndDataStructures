@@ -26,9 +26,14 @@ https://cp-algorithms.com/graph/depth-first-search.html
 https://cp-algorithms.com/graph/dijkstra.html
 #### Problems
 * https://open.kattis.com/problems/george Difficulty: 2.1
-* https://open.kattis.com/problems/kitchen Difficulty 3.3
+* https://open.kattis.com/problems/kitchen Difficulty: 3.3
 
 ### Minimum spanning tree
 Kruskal's algorithm
 #### Problems
-* https://open.kattis.com/problems/borg Difficulty 3.9
+* https://open.kattis.com/problems/borg Difficulty: 3.9
+
+### Maximum flow
+Ford Fulkerson
+#### Problems
+* https://open.kattis.com/problems/gopher2 Difficulty:4.8
