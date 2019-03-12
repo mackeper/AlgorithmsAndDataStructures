@@ -36,4 +36,9 @@ Kruskal's algorithm
 ### Maximum flow
 Ford Fulkerson
 #### Problems
-* https://open.kattis.com/problems/gopher2 Difficulty:4.8
+* https://open.kattis.com/problems/gopher2 Difficulty: 4.8
+
+### Topological sort
+Use dfs: https://cp-algorithms.com/graph/topological-sort.html
+#### Problems
+* https://open.kattis.com/problems/digicomp2 Difficulty: 5.5
