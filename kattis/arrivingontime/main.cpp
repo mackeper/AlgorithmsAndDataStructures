@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 #include "time_table_graph.hpp"
+#include "binary_search.hpp"
 using namespace std;
 
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
@@ -31,18 +32,9 @@ int main() {
         return 0;
     }
 
-
-    int64_t low = 0, high = s;
-    while(low + 1 < high) {
-        int64_t mid = (low+high)/2;
-        if(g.dijkstra(mid, 0, n-1) <= s) {
-            low = mid;
-        } else {
-            high = mid;
-        }
-    }
-    if(low <= s) {
-        cout << low << endl;
-    } 
+    int64_t res = alg::binary_search<int64_t>(0, s, s, [&](int64_t mid){
+        return g.dijkstra(mid, 0, n-1);
+    });
+    cout << res << endl;
     return 0;
 }
