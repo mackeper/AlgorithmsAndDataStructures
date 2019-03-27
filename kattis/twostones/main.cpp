@@ -12,9 +12,13 @@ typedef pair<int, int> pii;
 typedef vector<int> vi;
 
 int main() {
-    cin.sync_with_stdio(0);
-    cin.tie(0);
-    //cin.exceptions(cin.failbit);
+  cin.sync_with_stdio(0);
+  cin.tie(0);
+  cin.exceptions(cin.failbit);
 
-    return 0;
+  int n;
+  cin >> n;
+  cout << (n%2==0 ? "Bob\n" : "Alice\n");
+
+  return 0;
 }

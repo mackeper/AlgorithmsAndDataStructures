@@ -14,7 +14,26 @@ typedef vector<int> vi;
 int main() {
     cin.sync_with_stdio(0);
     cin.tie(0);
-    //cin.exceptions(cin.failbit);
+    cin.exceptions(cin.failbit);
+
+
+    ll n;
+    cin >> n;
+
+    while(1) {
+        ll x = n;
+        ll d_sum = 0;
+        while(x > 0) {
+            d_sum += x%10;
+            x /= 10;
+        }
+
+        if(n % d_sum == 0) {
+            cout << n << "\n";
+            break;
+        }
+        n++;
+    }
 
     return 0;
 }

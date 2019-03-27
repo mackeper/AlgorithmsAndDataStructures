@@ -14,7 +14,14 @@ typedef vector<int> vi;
 int main() {
     cin.sync_with_stdio(0);
     cin.tie(0);
-    //cin.exceptions(cin.failbit);
+    cin.exceptions(cin.failbit);
+
+    string s1, s2;
+    cin >> s1 >> s2;
+    if(s1.length() >= s2.length())
+        cout << "go\n";
+    else
+        cout << "no\n";
 
     return 0;
 }
