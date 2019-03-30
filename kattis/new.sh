@@ -1,7 +1,7 @@
 #!/bin/bash
 # Init kattis folder and download test files.
 
-URL="https://kth.kattis.com/problems/$1/file/statement/samples.zip"
+URL="https://open.kattis.com/problems/$1/file/statement/samples.zip"
 wget -q  "$URL" 
 if [ $? -ne 0 ] ; then
   echo "Failed"
