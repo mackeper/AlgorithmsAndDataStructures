@@ -24,8 +24,8 @@ run: $(TARGET).out
 test: $(TARGET).out
 	@for t in $(TESTS) ; do echo $$t && \
 	./$(TARGET).out < $$t > $${t%.*}.res && \
-	diff $${t%.*}.ans $${t%.*}.res || exit 0 ; done
+	diff -w $${t%.*}.ans $${t%.*}.res || exit 0 ; done
 
 clean:
-	rm $(TARGET).out
-	rm test/*.res
+	rm -f $(TARGET).out
+	rm -f test/*.res
