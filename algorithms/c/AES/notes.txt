@@ -1,0 +1,4 @@
+# AES
+https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.197.pdf
+
+https://kth.kattis.com/problems/oldkattis.aes
