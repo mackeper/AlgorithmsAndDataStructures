@@ -63,7 +63,7 @@ int main(void)
                 size_t chr_cnt = 0;
                 size_t blk_size = 16;
                 size_t num_blks = 1;
-                
+
                 uint32_t* message = (uint32_t*)calloc(
                                 blk_size*num_blks,
                                 sizeof(uint32_t));
@@ -73,10 +73,10 @@ int main(void)
                         if (chr_cnt != 0 && chr_cnt % 128 == 0) {
                                 num_blks++;
                                 message = (uint32_t*)realloc(
-                                        message, 
-                                        blk_size*num_blks*sizeof(uint32_t));
+                                                message, 
+                                                blk_size*num_blks*sizeof(uint32_t));
                                 for (size_t i = blk_size*num_blks-1; 
-                                          i < num_blks*blk_size; i++) {
+                                                i < num_blks*blk_size; i++) {
                                         message[i] = 0; 
                                 }
                         }
@@ -89,17 +89,16 @@ int main(void)
                 if (chr_cnt*4 >= 448) {
                         num_blks++;
                         message = (uint32_t*)realloc(
-                                message, 
-                                blk_size*num_blks*sizeof(uint32_t));
+                                        message, 
+                                        blk_size*num_blks*sizeof(uint32_t));
                         for (size_t i = blk_size*(num_blks-1); 
-                                  i < num_blks*blk_size; i++) {
+                                        i < num_blks*blk_size; i++) {
                                 message[i] = 0; 
                         }
                 }
 
                 /* Parsing */
-                message[chr_cnt/8] = 
-                        message[chr_cnt/8] | ((uint32_t)1<<(31-(chr_cnt%8)*4));
+                message[chr_cnt/8] |= ((uint32_t)1<<(31-(chr_cnt%8)*4));
                 message[num_blks*blk_size-1] |= 4*chr_cnt;
 
                 /* Init hash */
@@ -155,7 +154,7 @@ int main(void)
                 }
                 print_hash(hash_value);
                 printf("\n");
-                
+
                 /* Free memory */
                 free(message);
         }
