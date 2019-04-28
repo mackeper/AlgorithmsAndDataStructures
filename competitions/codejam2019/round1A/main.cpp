@@ -7,10 +7,6 @@ using namespace std;
 #define sz(x) (int)(x).size()
 #define EPS 10e-9
 
-const unsigned long long MOD_PRIME = 922337220451ULL;
-const unsigned long long ONE_PRIME = 16069ULL;
-const unsigned long long INV_PRIME = 184249329619ULL;
-
 //#define DEBUG
 #ifdef DEBUG
 #define D(...) fprintf(stderr, __VA_ARGS__);
