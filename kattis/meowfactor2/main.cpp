@@ -12,24 +12,16 @@ const unsigned long long MOD_PRIME = 922337220451ULL;
 const unsigned long long ONE_PRIME = 16069ULL;
 const unsigned long long INV_PRIME = 184249329619ULL;
 
-//#define DEBUG
-#ifdef DEBUG
-#define D(...) fprintf(stderr, __VA_ARGS__);
-#else
-#define D(...)
-#endif
-
 typedef long long i64;
 typedef unsigned long long u64;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
-popup::AhoCorasickAutomaton<std::pair<size_t, size_t>> automaton;
+popup::AhoCorasickAutomaton<std::pair<size_t, string>> automaton;
 
-void add_pattern(string &s, size_t idx, int value, size_t dots) {
+void add_pattern(string &s, size_t idx, size_t value, size_t dots) {
     if (dots == 0) {
-        D("Add: %s\n", s.c_str());
-        automaton.add_string(s, {value, 0});
+        automaton.add_string(s, {value, s});
         return;
     }
     for (size_t i = idx; i < s.size(); i++) {
@@ -52,7 +44,7 @@ void add_patterns(vector<pair<string, int>> patterns) {
             }
         }
         if (!dots) {
-            automaton.add_string(p.first, {p.second, 0});
+            automaton.add_string(p.first, {p.second, p.first});
         } else {
             add_pattern(p.first, 0, p.second, dots);
         }
@@ -64,7 +56,23 @@ int main() {
     cin.tie(0);
 
     vector<pair<string, int>> patterns;
-    patterns.emplace_back("meow", 0);
+
+    patterns.emplace_back("m", 3);
+    patterns.emplace_back("e", 3);
+    patterns.emplace_back("o", 3);
+    patterns.emplace_back("w", 3);
+
+    patterns.emplace_back("m..w", 2);
+    patterns.emplace_back("m.w", 2);
+    patterns.emplace_back("e.w", 2);
+    patterns.emplace_back("m.o", 2);
+    
+    patterns.emplace_back("me", 2);
+    patterns.emplace_back("mo", 2);
+    patterns.emplace_back("mw", 2);
+    patterns.emplace_back("eo", 2);
+    patterns.emplace_back("ew", 2);
+    patterns.emplace_back("ow", 2);
 
     //insert
     patterns.emplace_back("mew", 1);
@@ -72,32 +80,17 @@ int main() {
     patterns.emplace_back("eow", 1);
     patterns.emplace_back("meo", 1);
 
-    patterns.emplace_back("me", 2);
-    patterns.emplace_back("mo", 2);
-    patterns.emplace_back("mw", 2);
-    patterns.emplace_back("eo", 2);
-    patterns.emplace_back("ew", 2);
-    patterns.emplace_back("ew", 2);
+    // swap
+    patterns.emplace_back("moew", 1);
 
-    patterns.emplace_back("m", 3);
-    patterns.emplace_back("e", 3);
-    patterns.emplace_back("o", 3);
-    patterns.emplace_back("w", 3);
+    // delete
+    patterns.emplace_back("me.ow", 1);
 
     // replace
     patterns.emplace_back("me.w", 1);
     patterns.emplace_back("m.ow", 1);
 
-    patterns.emplace_back("m..w", 2);
-    patterns.emplace_back("m.w", 2);
-    patterns.emplace_back("e.w", 2);
-    //patterns.emplace_back("m.o", 2);
-
-    // swap
-    patterns.emplace_back("moew", 1);
-
-    // delete
-    patterns.emplace_back("mo.ew", 1);
+    patterns.emplace_back("meow", 0);
 
     add_patterns(patterns);
     automaton.build_automaton();

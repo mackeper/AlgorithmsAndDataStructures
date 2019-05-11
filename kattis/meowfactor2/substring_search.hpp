@@ -155,7 +155,6 @@ namespace popup {
                 ) {
             AhoCorasickAutomaton<std::pair<size_t, size_t>> automaton;
             std::vector<std::pair<size_t, size_t>> match;
-
             for (auto itr = pattern_begin; itr != pattern_end; itr++) {
                 automaton.add_string(
                         *itr,
