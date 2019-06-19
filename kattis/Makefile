@@ -21,10 +21,20 @@ run: $(TARGET).out
 
 # Tests in /test, donno about PHONY should google it some day...
 .PHONY: clean test
+testall: $(TARGET).out
+	@for t in $(TESTS) ; do\
+		./$(TARGET).out < $$t > $${t%.*}.res;\
+		diff -wrq $${t%.*}.ans $${t%.*}.res || true;\
+	done
+
+.PHONY: clean test
 test: $(TARGET).out
-	@for t in $(TESTS) ; do echo $$t && \
-	./$(TARGET).out < $$t > $${t%.*}.res && \
-	diff -w $${t%.*}.ans $${t%.*}.res || exit 0 ; done
+	@for t in $(TESTS) ; do\
+		echo $$t;\
+		./$(TARGET).out < $$t > $${t%.*}.res;\
+		diff -w $${t%.*}.ans $${t%.*}.res || exit 0;\
+	done
+
 
 clean:
 	rm -f $(TARGET).out
