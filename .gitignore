@@ -33,3 +33,12 @@
 
 # Used for kattis tests
 *.res
+
+# Editor
+.fake
+.ionide
+.vs/
+
+# Build
+obj/
+bin/
