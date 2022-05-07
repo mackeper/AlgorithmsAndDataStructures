@@ -27,7 +27,7 @@ _readline = lambda: _fast_readline().decode()
 read_line = lambda: _readline().strip()
 read_list = lambda: _readline().strip().split(' ')
 read_int = lambda: int(_readline())
-read_int_list = lambda: [int(x) for x in read_list]
+read_int_list = lambda: [int(x) for x in read_list()]
 write = lambda *msg: sys.stdout.write(' '.join(list(map(str, msg))))
 writeln = lambda *msg: sys.stdout.write(' '.join(list(map(str, msg))) + '\\n')
 
