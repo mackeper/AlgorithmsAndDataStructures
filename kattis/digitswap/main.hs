@@ -1,0 +1,1 @@
+main = interact (\input -> show ((read::String->Int) (foldl (\a x -> x : a) "" input)))
