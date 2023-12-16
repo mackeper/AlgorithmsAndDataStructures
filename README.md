@@ -24,56 +24,61 @@ http://cp-algorithms.com/
 * [HackerRank](https://www.hackerrank.com/profile/Mackeper)
 * [Advent of Code](https://adventofcode.com/)
 
-| Algorithm                              | Implemented                                                                                                      | Platform to Test                                                                                                |
-|--------------------------------------  |-----------------------------------------------------------                                                       |----------------------                                                                                           |
-| **Graphs**                             |                                                                                                                  |                                                                                                                 |
-| Breadth-first search                   | ❌                                                                                                               |                                                                                                                 |
-| Depth-first search                     | ❌                                                                                                               |                                                                                                                 |
-| Dijkstra's algorithm                   | ❌                                                                                                               |                                                                                                                 |
-| Bellman-Ford algorithm                 | ❌                                                                                                               |                                                                                                                 |
-| Floyd-Warshall algorithm               | ❌                                                                                                               |                                                                                                                 |
-| Prim's algorithm                       | ❌                                                                                                               |                                                                                                                 |
-| Kruskal's algorithm                    | ❌                                                                                                               |                                                                                                                 |
-| Topological sorting                    | ❌                                                                                                               |                                                                                                                 |
-| Edmonds-Karp algorithm                 | ❌                                                                                                               |                                                                                                                 |
-| Ford-Fulkerson algorithm               | ❌                                                                                                               |                                                                                                                 |
-| **Strings**                            |                                                                                                                  |                                                                                                                 |
-| Knuth-Morris-Pratt algorithm           | ❌                                                                                                               |                                                                                                                 |
-| Z algorithm                            | ❌                                                                                                               |                                                                                                                 |
-| Rabin-Karp algorithm                   | ❌                                                                                                               |                                                                                                                 |
-| Aho-Corasick algorithm                 | ❌                                                                                                               |                                                                                                                 |
-| Manacher's algorithm                   | ❌                                                                                                               |                                                                                                                 |
-| Suffix array                           | ❌                                                                                                               |                                                                                                                 |
-| Suffix automaton                       | ❌                                                                                                               |                                                                                                                 |
-| Suffix tree                            | ❌                                                                                                               |                                                                                                                 |
-| **Math**                               |                                                                                                                  |                                                                                                                 |
-| Sieve of Eratosthenes                  | ❌                                                                                                               |                                                                                                                 |
-| Euclidean algorithm                    | [C++](./algorithms/cpp/math/modular.hpp)                                                                         |                                                                                                                 |
-| Extended Euclidean algorithm           | [C++](./algorithms/cpp/math/modular.hpp)                                                                         |                                                                                                                 |
-| Chinese remainder theorem              | [C++](./algorithms/cpp/math/modular.hpp)                                                                         | [Kattis](https://open.kattis.com/problems/generalchineseremainder)                                              |
-| Fast Fourier transform                 | ❌                                                                                                               |                                                                                                                 |
-| Primality tests                        | ❌                                                                                                               |                                                                                                                 |
-| Factorization                          | ❌                                                                                                               |                                                                                                                 |
-| Euler's totient function               | ❌                                                                                                               |                                                                                                                 |
-| **Geometry**                           |                                                                                                                  |                                                                                                                 |
-| Convex hull                            | ❌                                                                                                               |                                                                                                                 |
-| Sweep line                             | ❌                                                                                                               |                                                                                                                 |
-| Rotating calipers                      | ❌                                                                                                               |                                                                                                                 |
-| Line intersection                      | ❌                                                                                                               |                                                                                                                 |
-| Closest pair of points                 | ❌                                                                                                               |                                                                                                                 |
-| Delaunay triangulation                 | ❌                                                                                                               |                                                                                                                 |
-| Voronoi diagram                        | ❌                                                                                                               |                                                                                                                 |
-| KD-tree                                | ❌                                                                                                               |                                                                                                                 |
-| **Dynamic programming**                |                                                                                                                  |                                                                                                                 |
-| Knapsack problem                       | ❌                                                                                                               |                                                                                                                 |
-| Longest increasing subsequence         | ❌                                                                                                               |                                                                                                                 |
-| Longest common subsequence             | ❌                                                                                                               |                                                                                                                 |
-| Edit distance                          | ❌                                                                                                               |                                                                                                                 |
-| Matrix chain multiplication            | ❌                                                                                                               |                                                                                                                 |
-| Convex hull trick                      | ❌                                                                                                               |                                                                                                                 |
-| Divide and conquer optimization        | ❌                                                                                                               |                                                                                                                 |
-| **Data structures**                    |                                                                                                                  |                                                                                                                 |
-| Disjoint-set union                     | ❌                                                                                                               |                                                                                                                 |
-| Fenwick tree                           | [C++](./algorithms/cpp_lib_cleanmeuppls/fenwick_tree.hpp)                                                        | [Kattis](https://open.kattis.com/problems/fenwick)                                                              |
-| Segment tree                           | ❌                                                                                                               |                                                                                                                 |
-| Bloom filter                           | ❌                                                                                                               |                                                                                                                 |
+| Algorithm | Implemented | Platform to Test |
+|------------|-------------|------------------|
+| **Graphs** | | |
+| Breadth-first search | ❌ | |
+| Depth-first search | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Dijkstra's algorithm | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Bellman-Ford algorithm | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Floyd-Warshall algorithm | ❌ | |
+| Prim's algorithm | ❌ | |
+| Kruskal's algorithm | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Topological sorting | ❌ | |
+| Edmonds-Karp algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/flow_graph.hpp) | |
+| Ford-Fulkerson algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/flow_graph.hpp) | |
+| Eulerian path | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | | 
+| **Strings** | | |
+| Knuth-Morris-Pratt algorithm | ❌ | |
+| Z algorithm | ❌ | |
+| Rabin-Karp algorithm | ❌ | |
+| Aho-Corasick algorithm | ❌ | |
+| Manacher's algorithm | ❌ | |
+| Suffix array | ❌ | |
+| Suffix automaton | ❌ | |
+| Suffix tree | ❌ | |
+| **Math** | | |
+| Sieve of Eratosthenes | ❌ | |
+| Euclidean algorithm | [C++](./algorithms/cpp/math/modular.hpp) | |
+| Extended Euclidean algorithm | [C++](./algorithms/cpp/math/modular.hpp) | |
+| Chinese remainder theorem | [C++](./algorithms/cpp/math/modular.hpp) | [Kattis](https://open.kattis.com/problems/generalchineseremainder) |
+| Fast Fourier transform | ❌ | |
+| Primality tests | ❌ | |
+| Factorization | ❌ | |
+| Euler's totient function | ❌ | |
+| **Geometry** | | |
+| Convex hull | [C++](/algorithms/cpp_lib_cleanmeuppls/math/convex_hull.hpp) | |
+| Sweep line | ❌ | |
+| Rotating calipers | ❌ | |
+| Line intersection | ❌ | |
+| Closest pair of points | ❌ | |
+| Delaunay triangulation | ❌ | |
+| Voronoi diagram | ❌ | |
+| KD-tree | ❌ | |
+| **Dynamic programming** | | |
+| Knapsack problem | ❌ | |
+| Longest increasing subsequence | ❌ | |
+| Longest common subsequence | ❌ | |
+| Edit distance | ❌ | |
+| Matrix chain multiplication | ❌ | |
+| Convex hull trick | ❌ | |
+| Divide and conquer optimization | ❌ | |
+| **Cryptographic algorithms** | | |
+| RSA | ❌ | |
+| AES | [C](./algorithms/c/AES/main.c)  | |
+| SHA-256 | [C](./algorithms/c/sha256/main.c) | |
+| **Data structures** | | |
+| Disjoint-set union | [C++](./algorithms/cpp_lib_cleanmeuppls/union_find.hpp) | |
+| Fenwick tree | [C++](./algorithms/cpp_lib_cleanmeuppls/fenwick_tree.hpp) | [Kattis](https://open.kattis.com/problems/fenwick) |
+| Segment tree | ❌ | |
+| Bloom filter | ❌ | |
