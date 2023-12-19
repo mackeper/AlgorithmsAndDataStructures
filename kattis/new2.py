@@ -5,7 +5,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
-from typing import List
+from typing import Callable, List
 from zipfile import ZipFile
 
 import requests
@@ -22,18 +22,26 @@ class Sample:
 class Language:
     name: str
     extension: str
-    command: str = None
+    # annotate as function
+    setup: List[Callable[str, None]]
 
 
 languages = [
-    Language('Python', 'py'),
-    Language('C++', 'cpp'),
-    Language('C', 'c'),
-    Language('C#', 'cs'),
-    Language('Haskell', 'hs'),
-    Language('Rust', 'rs', 'cargo new'),
-    Language('Scala', 'scala'),
-    Language('Go', 'go'),
+    Language('Python', 'py', []),
+    Language('C++', 'cpp', []),
+    Language('C', 'c', []),
+    Language('C#', 'cs', []),
+    Language('Haskell', 'hs', []),
+    Language(
+        'Rust',
+        'rs',
+        [
+            lambda x: os.system(f'cargo new {x}'),
+            lambda x: shutil.copy('main.rs', f"{x}/src/main.rs"),
+        ]
+    ),
+    Language('Scala', 'scala', []),
+    Language('Go', 'go', []),
 ]
 
 
@@ -57,11 +65,7 @@ def write_samples_to_files(problem_name: str, samples: List[Sample]) -> None:
 
 
 def setup_problem(language: Language, problem_name: str) -> None:
-    if language.command is not None:
-        os.system(f'{language.command} {problem_name}')
-    os.makedirs(problem_name, exist_ok=True)
-    shutil.copy(f'main.{language.extension}', problem_name)
-
+    [f(problem_name) for f in language.setup]
     samples = download_samples(problem_name)
     write_samples_to_files(problem_name, samples)
 
@@ -81,6 +85,31 @@ def main(args: List[str]) -> None:
 
 if __name__ == '__main__':
     main(sys.argv)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

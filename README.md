@@ -18,26 +18,26 @@ https://www.topcoder.com/community/competitive-programming/tutorials/
 http://cp-algorithms.com/
 
 ## Platforms / profiles :computer:
-* [Kattis](https://open.kattis.com/users/macke)
-* [Codeforces](https://codeforces.com/)
+* [Kattis](https://open.kattis.com/users/macke) 200+ problems solved
+* [Codeforces](https://codeforces.com/) barely used
 * [LeetCode](https://leetcode.com/mackeper/) not used
 * [HackerRank](https://www.hackerrank.com/profile/Mackeper)
-* [Advent of Code](https://adventofcode.com/)
+* [Advent of Code](https://adventofcode.com/) not used
 
 | Algorithm | Implemented | Platform to Test |
 |------------|-------------|------------------|
 | **Graphs** | | |
-| Breadth-first search | ❌ | |
-| Depth-first search | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
-| Dijkstra's algorithm | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
-| Bellman-Ford algorithm | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Breadth-first search | [Rust](./algorithms/rust/src/graph/bfs.rs) | [HackerRank](https://www.hackerrank.com/challenges/ctci-bfs-shortest-reach/problem) | 
+| Depth-first search | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Dijkstra's algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Bellman-Ford algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
 | Floyd-Warshall algorithm | ❌ | |
 | Prim's algorithm | ❌ | |
-| Kruskal's algorithm | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
+| Kruskal's algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
 | Topological sorting | ❌ | |
 | Edmonds-Karp algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/flow_graph.hpp) | |
 | Ford-Fulkerson algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/flow_graph.hpp) | |
-| Eulerian path | [C++](/algorithms/cpp_lib_cleanmeuppls/graph.hpp) | | 
+| Eulerian path | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | | 
 | **Strings** | | |
 | Knuth-Morris-Pratt algorithm | ❌ | |
 | Z algorithm | ❌ | |
@@ -48,7 +48,7 @@ http://cp-algorithms.com/
 | Suffix automaton | ❌ | |
 | Suffix tree | ❌ | |
 | **Math** | | |
-| Sieve of Eratosthenes | ❌ | |
+| Sieve of Eratosthenes | [Rust](./algorithms/rust/src/math/mod.rs) | [Kattis](https://open.kattis.com/problems/primecount) |
 | Euclidean algorithm | [C++](./algorithms/cpp/math/modular.hpp) | |
 | Extended Euclidean algorithm | [C++](./algorithms/cpp/math/modular.hpp) | |
 | Chinese remainder theorem | [C++](./algorithms/cpp/math/modular.hpp) | [Kattis](https://open.kattis.com/problems/generalchineseremainder) |
@@ -57,7 +57,7 @@ http://cp-algorithms.com/
 | Factorization | ❌ | |
 | Euler's totient function | ❌ | |
 | **Geometry** | | |
-| Convex hull | [C++](/algorithms/cpp_lib_cleanmeuppls/math/convex_hull.hpp) | |
+| Convex hull | [C++](./algorithms/cpp_lib_cleanmeuppls/math/convex_hull.hpp) | |
 | Sweep line | ❌ | |
 | Rotating calipers | ❌ | |
 | Line intersection | ❌ | |

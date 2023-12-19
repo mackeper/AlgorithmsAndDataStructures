@@ -39,10 +39,15 @@ use std::io::BufRead;
 use input::*;
 
 fn solve<R: BufRead>(stdin: &mut R, buffer: &mut String) -> String {
-    let value: u64 = get_line_of_integer(stdin, buffer);
-    let side = (value as f64).sqrt();
-    let fence = side * 4.0;
-    fence.to_string()
+    let value: usize = get_line_of_integer(stdin, buffer);
+    let mut result = Vec::new();
+    result.push(format!("+{}+", '-'.to_string().repeat(value)));
+    for _ in 0..value {
+        result.push(format!("|{}|", ' '.to_string().repeat(value)));
+    }
+    result.push(format!("+{}+", '-'.to_string().repeat(value)));
+
+    result.join("\n")
 }
 
 fn main() {
@@ -62,19 +67,26 @@ mod tests {
     }
 
     #[test]
-    fn test_1() {
-        let mut stdin = "16".as_bytes();
+    fn test_0() {
+        let mut stdin = "0".as_bytes();
         let mut buffer = String::with_capacity(1024);
-        assert_eq!(solve(&mut stdin, &mut buffer), "16");
+        assert_eq!(solve(&mut stdin, &mut buffer), "++\n++");
     }
 
     #[test]
-    fn test_2() {
-        let mut stdin = "5\n".as_bytes();
+    fn test_1() {
+        let mut stdin = "1".as_bytes();
         let mut buffer = String::with_capacity(1024);
-        assert!(within_epsilon(
-            solve(&mut stdin, &mut buffer).parse::<f64>().unwrap(),
-            8.94427190999915878564
-        ));
+        assert_eq!(solve(&mut stdin, &mut buffer), "+-+\n| |\n+-+");
+    }
+
+    #[test]
+    fn test_3() {
+        let mut stdin = "3".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(
+            solve(&mut stdin, &mut buffer),
+            "+---+\n|   |\n|   |\n|   |\n+---+"
+        );
     }
 }
