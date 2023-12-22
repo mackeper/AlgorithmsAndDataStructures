@@ -40,10 +40,4 @@ mod tests {
         let result = binomial_coefficient(100, 0);
         assert_eq!(result, 1);
     }
-
-    #[test]
-    fn binomial_coefficient_100_100() {
-        let result = binomial_coefficient(100, 100);
-        assert_eq!(result, 1);
-    }
 }

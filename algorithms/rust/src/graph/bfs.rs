@@ -29,7 +29,7 @@ pub fn bfs(graph: &HashMap<usize, Vec<usize>>, s: usize) -> Vec<usize> {
         if !visited.contains(&node) {
             visited.insert(node);
             result.push(node);
-            for v in graph.get(&node).unwrap().iter() {
+            for v in graph.get(&node).unwrap_or(&vec![]).iter() {
                 queue.push(*v);
             }
         }
@@ -43,27 +43,66 @@ mod tests {
 
     #[test]
     fn bfs_small_graph() {
+        let mut graph = HashMap::new();
+        graph.insert(0, vec![1, 2]);
+        graph.insert(1, vec![2]);
+        graph.insert(2, vec![0, 3]);
+        graph.insert(3, vec![3]);
+        let result = bfs(&graph, 2);
+        assert_eq!(result, vec![2, 0, 3, 1]);
+    }
+
+    #[test]
+    fn bfs_empty_graph() {
+        let graph = HashMap::new();
+        let result = bfs(&graph, 0);
+        assert_eq!(result, vec![]);
+    }
+
+    #[test]
+    fn bfs_disconnected() {
+        let mut graph = HashMap::new();
+        graph.insert(0, vec![1, 2]);
+        graph.insert(1, vec![2]);
+        graph.insert(3, vec![4]);
+        let result = bfs(&graph, 0);
+        assert_eq!(result, vec![0, 1, 2]);
+    }
+
+    #[test]
+    fn bfs_line() {
+        let mut graph = HashMap::new();
+        graph.insert(0, vec![1]);
+        graph.insert(1, vec![2]);
+        graph.insert(2, vec![3]);
+        graph.insert(3, vec![4]);
+        let result = bfs(&graph, 0);
+        assert_eq!(result, vec![0, 1, 2, 3, 4]);
+    }
+
+    #[test]
+    fn bfs_edges_small_graph() {
         let edges = vec![(0, 1), (0, 2), (1, 2), (2, 0), (2, 3), (3, 3)];
         let result = bfs_edges(&edges, 2);
         assert_eq!(result, vec![2, 0, 3, 1]);
     }
 
     #[test]
-    fn bfs_empty_graph() {
+    fn bfs_egdes_empty_graph() {
         let edges = vec![];
         let result = bfs_edges(&edges, 0);
         assert_eq!(result, vec![]);
     }
 
     #[test]
-    fn bfs_line() {
+    fn bfs_edges_line() {
         let edges = vec![(0, 1), (1, 2), (2, 3), (3, 4)];
         let result = bfs_edges(&edges, 0);
         assert_eq!(result, vec![0, 1, 2, 3, 4]);
     }
 
     #[test]
-    fn bfs_disconnected() {
+    fn bfs_edges_disconnected() {
         let edges = vec![(0, 1), (1, 2), (3, 4)];
         let result = bfs_edges(&edges, 0);
         assert_eq!(result, vec![0, 1, 2]);

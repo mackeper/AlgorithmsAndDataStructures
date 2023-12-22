@@ -78,7 +78,7 @@ http://cp-algorithms.com/
 | AES | [C](./algorithms/c/AES/main.c)  | |
 | SHA-256 | [C](./algorithms/c/sha256/main.c) | |
 | **Data structures** | | |
-| Disjoint-set union | [C++](./algorithms/cpp_lib_cleanmeuppls/union_find.hpp) | |
+| Disjoint-set union | [C++](./algorithms/cpp_lib_cleanmeuppls/union_find.hpp) [Rust](./algorithms/rust/src/datastructures/union_find.rs) | |
 | Fenwick tree | [C++](./algorithms/cpp_lib_cleanmeuppls/fenwick_tree.hpp) | [Kattis](https://open.kattis.com/problems/fenwick) |
 | Segment tree | ❌ | |
 | Bloom filter | ❌ | |

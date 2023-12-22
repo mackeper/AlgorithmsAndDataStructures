@@ -1,3 +1,4 @@
+pub mod datastructures;
 pub mod graph;
 pub mod math;
 
