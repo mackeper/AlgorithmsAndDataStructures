@@ -17,9 +17,9 @@ pub struct UnionFind {
 impl UnionFind {
     // Create a new UnionFind data structure with size elements.
     pub fn new(size: usize) -> Self {
-        let subsets: Vec<Subset> = (0..size).map(|i| Subset { parent: i, rank: 0 }).collect();
-
-        UnionFind { subsets }
+        UnionFind {
+            subsets: (0..size).map(|i| Subset { parent: i, rank: 0 }).collect(),
+        }
     }
 
     // Find the root of the set that i belongs to.

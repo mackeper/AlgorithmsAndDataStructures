@@ -34,7 +34,7 @@ A collection of algorithms and data structures that I have implemented. Also, so
 | Dijkstra's algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
 | Edmonds-Karp algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/flow_graph.hpp) | |
 | Eulerian path | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
-| Floyd-Warshall algorithm | ❌ | |
+| Floyd-Warshall algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) [Rust](./algorithms/rust/src/graph/floyd_warshall.rs) | |
 | Ford-Fulkerson algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/flow_graph.hpp) | |
 | Kruskal's algorithm | [C++](./algorithms/cpp_lib_cleanmeuppls/graph.hpp) | |
 | Prim's algorithm | ❌ | |
@@ -80,7 +80,7 @@ A collection of algorithms and data structures that I have implemented. Also, so
 | RSA | ❌ | |
 | SHA-256 | [C](./algorithms/c/sha256/main.c) | |
 | **Data structures** | | |
-| Bloom filter | ❌ | |
+| Bloom filter | [Rust](./algorithms/rust/src/datastructures/bloom_filter.rs) | |
 | Disjoint-set union | [C++](./algorithms/cpp_lib_cleanmeuppls/union_find.hpp) [Rust](./algorithms/rust/src/datastructures/union_find.rs) | |
 | Fenwick tree | [C++](./algorithms/cpp_lib_cleanmeuppls/fenwick_tree.hpp) | [Kattis](https://open.kattis.com/problems/fenwick) |
 | Segment tree | ❌ | |
