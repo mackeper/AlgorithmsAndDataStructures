@@ -4,25 +4,38 @@
 //! path from s to all other nodes in the graph.
 //! u: source node, v: destination node, w: weight of the edge (u, v)
 
-use std::collections::{HashMap, HashSet};
+use std::{
+    cmp::Reverse,
+    collections::{BinaryHeap, HashMap},
+};
 
-pub fn djikstra(graph: &HashMap<usize, Vec<(usize, usize)>>, s: usize) -> HashMap<usize, usize> {
+pub fn dijkstra(graph: &HashMap<usize, Vec<(usize, usize)>>, s: usize) -> HashMap<usize, usize> {
+    if graph.is_empty() {
+        return HashMap::new();
+    }
+
     let mut distances = HashMap::new();
     distances.insert(s, 0);
-    let mut visited = HashSet::new();
-    let mut queue = vec![s];
+    let mut visited = vec![false; graph.len()];
+    let mut queue = BinaryHeap::new();
+    queue.push(Reverse((0, s)));
 
     while !queue.is_empty() {
-        let node = queue.remove(0);
-        if !visited.contains(&node) {
-            visited.insert(node);
-            for (v, w) in graph.get(&node).unwrap_or(&vec![]).iter() {
-                let distance = distances.get(&node).unwrap_or(&0) + w;
-                let current_distance = distances.get(v).unwrap_or(&usize::MAX);
-                if distance < *current_distance {
-                    distances.insert(*v, distance);
-                }
-                queue.push(*v);
+        let node = queue.pop().unwrap().0 .1;
+
+        if visited[node] {
+            continue;
+        }
+
+        visited[node] = true;
+
+        for (v, w) in graph.get(&node).unwrap_or(&vec![]).iter() {
+            let new_distance = distances.get(&node).unwrap_or(&usize::MAX) + w;
+            let current_distance = distances.get(v).unwrap_or(&usize::MAX);
+
+            if new_distance < *current_distance {
+                distances.insert(*v, new_distance);
+                queue.push(Reverse((new_distance, *v)));
             }
         }
     }
@@ -35,8 +48,7 @@ pub fn djikstra_edges(edges: &Vec<(usize, usize, usize)>, s: usize) -> HashMap<u
     for (u, v, w) in edges {
         graph.entry(*u).or_insert(vec![]).push((*v, *w));
     }
-    djikstra(&graph, s)
-    
+    dijkstra(&graph, s)
 }
 
 #[cfg(test)]
@@ -50,7 +62,7 @@ mod tests {
         graph.insert(1, vec![(2, 2)]);
         graph.insert(2, vec![(0, 1), (3, 5)]);
         graph.insert(3, vec![(3, 3)]);
-        let result = djikstra(&graph, 0);
+        let result = dijkstra(&graph, 0);
         let mut expected = HashMap::new();
         expected.insert(0, 0);
         expected.insert(1, 4);
@@ -60,11 +72,46 @@ mod tests {
     }
 
     #[test]
-    fn djikstra_empty_graph() {
-        let graph = HashMap::new();
-        let result = djikstra(&graph, 0);
+    fn djikstra_longer_path_is_shorter() {
+        let mut graph = HashMap::new();
+        graph.insert(0, vec![(1, 10), (2, 1)]);
+        graph.insert(1, vec![]);
+        graph.insert(2, vec![(3, 1)]);
+        graph.insert(3, vec![(4, 1)]);
+        graph.insert(4, vec![(1, 1)]);
+        let result = dijkstra(&graph, 0);
         let mut expected = HashMap::new();
         expected.insert(0, 0);
+        expected.insert(1, 4);
+        expected.insert(2, 1);
+        expected.insert(3, 2);
+        expected.insert(4, 3);
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn dijkstra_test() {
+        let mut graph = HashMap::new();
+        graph.insert(0, vec![(4, 401), (3, 14), (1, 896)]);
+        graph.insert(1, vec![(2, 854)]);
+        graph.insert(2, vec![(4, 66)]);
+        graph.insert(3, vec![(0, 451), (2, 27)]);
+        graph.insert(4, vec![(1, 145), (3, 813)]);
+        let result = dijkstra(&graph, 3);
+        let mut expected = HashMap::new();
+        expected.insert(0, 451);
+        expected.insert(1, 238);
+        expected.insert(2, 27);
+        expected.insert(3, 0);
+        expected.insert(4, 93);
+        assert_eq!(result, expected);
+    }
+
+    #[test]
+    fn djikstra_empty_graph() {
+        let graph = HashMap::new();
+        let result = dijkstra(&graph, 0);
+        let expected = HashMap::new();
         assert_eq!(result, expected);
     }
 
@@ -75,7 +122,8 @@ mod tests {
         graph.insert(1, vec![(2, 1)]);
         graph.insert(2, vec![(3, 1)]);
         graph.insert(3, vec![(4, 1)]);
-        let result = djikstra(&graph, 0);
+        graph.insert(4, vec![]);
+        let result = dijkstra(&graph, 0);
         let mut expected = HashMap::new();
         expected.insert(0, 0);
         expected.insert(1, 1);
@@ -91,7 +139,7 @@ mod tests {
         graph.insert(0, vec![(1, 1)]);
         graph.insert(1, vec![(2, 1)]);
         graph.insert(3, vec![(4, 1)]);
-        let result = djikstra(&graph, 0);
+        let result = dijkstra(&graph, 0);
         let mut expected = HashMap::new();
         expected.insert(0, 0);
         expected.insert(1, 1);

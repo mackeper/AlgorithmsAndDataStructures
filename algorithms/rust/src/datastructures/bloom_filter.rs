@@ -20,10 +20,11 @@ pub struct BloomFilter {
 impl BloomFilter {
     // TODO: calculate optimal k and m
     pub fn new_default() -> Self {
+        let size = 51170; // large prime
         BloomFilter {
-            bitset: vec![],
+            bitset: vec![false; size],
             k: 10,
-            m: 51170, // large prime
+            m: size, // large prime
         }
     }
 
