@@ -40,9 +40,7 @@ use input::*;
 
 fn solve<R: BufRead>(stdin: &mut R, buffer: &mut String) -> String {
     let value: u64 = get_line_of_integer(stdin, buffer);
-    let side = (value as f64).sqrt();
-    let fence = side * 4.0;
-    fence.to_string()
+    (value - 1).to_string()
 }
 
 fn main() {
@@ -52,3 +50,34 @@ fn main() {
 
     println!("{}", solve(&mut stdin, &mut buffer));
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn within_epsilon(a: f64, b: f64) -> bool {
+        (a - b).abs() < 1e-6
+    }
+
+    #[test]
+    fn test_1() {
+        let mut stdin = "1".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(solve(&mut stdin, &mut buffer), "0");
+    }
+
+    #[test]
+    fn test_2() {
+        let mut stdin = "2".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(solve(&mut stdin, &mut buffer), "1");
+    }
+
+    #[test]
+    fn test_3() {
+        let mut stdin = "1337".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(solve(&mut stdin, &mut buffer), "1336");
+    }
+}
+

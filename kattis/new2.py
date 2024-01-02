@@ -36,13 +36,40 @@ languages = [
         'Rust',
         'rs',
         [
-            lambda x: os.system(f'cargo new {x}'),
-            lambda x: shutil.copy('main.rs', f"{x}/src/main.rs"),
+            lambda name, _: os.system(f'cargo new {name}'),
+            lambda name, _: shutil.copy('main.rs', f"{name}/src/main.rs"),
+            lambda name, samples: rust_append_tests(name, samples)
         ]
     ),
     Language('Scala', 'scala', []),
     Language('Go', 'go', []),
 ]
+
+
+def rust_append_tests(problem_name: str, samples: List[Sample]) -> None:
+    test_cases = """
+#[cfg(test)]
+mod tests {
+   use super::*;
+
+   fn within_epsilon(a: f64, b: f64) -> bool {
+       (a - b).abs() < 1e-6
+   }
+"""
+    for sample in samples:
+        input = sample.input.replace('\n', '\\n').rstrip('\\n')
+        answer = sample.answer.replace('\n', '\\n').rstrip('\\n')
+        test_cases += '\n'
+        test_cases += '    #[test]\n'
+        test_cases += f'    fn test_{sample.name}() {{\n'
+        test_cases += f'        let mut stdin = "{input}".as_bytes();\n'
+        test_cases += '        let mut buffer = String:: with_capacity(1024);\n'
+        test_cases += f'        assert_eq!(solve( & mut stdin, & mut buffer), "{answer}");\n'
+        test_cases += '    }\n'
+
+    test_cases += "}"
+    with open(Path(problem_name) / Path('src/main.rs'), 'a+', newline='') as file:
+        file.write(test_cases)
 
 
 def download_samples(problem_name: str) -> List[Sample]:
@@ -65,8 +92,8 @@ def write_samples_to_files(problem_name: str, samples: List[Sample]) -> None:
 
 
 def setup_problem(language: Language, problem_name: str) -> None:
-    [f(problem_name) for f in language.setup]
     samples = download_samples(problem_name)
+    [f(problem_name, samples) for f in language.setup]
     write_samples_to_files(problem_name, samples)
 
 
@@ -85,38 +112,4 @@ def main(args: List[str]) -> None:
 
 if __name__ == '__main__':
     main(sys.argv)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

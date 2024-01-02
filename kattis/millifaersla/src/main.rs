@@ -39,10 +39,17 @@ use std::io::BufRead;
 use input::*;
 
 fn solve<R: BufRead>(stdin: &mut R, buffer: &mut String) -> String {
-    let value: u64 = get_line_of_integer(stdin, buffer);
-    let side = (value as f64).sqrt();
-    let fence = side * 4.0;
-    fence.to_string()
+    let a: u64 = get_line_of_integer(stdin, buffer);
+    let b: u64 = get_line_of_integer(stdin, buffer);
+    let c: u64 = get_line_of_integer(stdin, buffer);
+
+    if a < b && a < c {
+        "Monnei".to_string()
+    } else if b < a && b < c {
+        "Fjee".to_string()
+    } else {
+        "Dolladollabilljoll".to_string()
+    }
 }
 
 fn main() {
@@ -52,3 +59,33 @@ fn main() {
 
     println!("{}", solve(&mut stdin, &mut buffer));
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn within_epsilon(a: f64, b: f64) -> bool {
+        (a - b).abs() < 1e-6
+    }
+    #[test]
+    fn test_1() {
+        let mut stdin = "3\n9\n7\n".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(solve(&mut stdin, &mut buffer), "Monnei");
+    }
+
+    #[test]
+    fn test_2() {
+        let mut stdin = "323\n19\n999\n".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(solve(&mut stdin, &mut buffer), "Fjee");
+    }
+
+    #[test]
+    fn test_3() {
+        let mut stdin = "40\n30\n20\n".as_bytes();
+        let mut buffer = String::with_capacity(1024);
+        assert_eq!(solve(&mut stdin, &mut buffer), "Dolladollabilljoll");
+    }
+}
+
