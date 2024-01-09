@@ -46,29 +46,23 @@ fn evaluate_happines(coefficients: &[i64]) -> i64 {
 }
 
 fn solve<R: BufRead>(stdin: &mut R, buffer: &mut String) -> String {
-    let _n: usize = get_line_of_integer(stdin, buffer);
+    let n: usize = get_line_of_integer(stdin, buffer);
     let happiness = get_line_of_integers::<i64, R>(stdin, buffer)
         .iter()
         .filter(|x| **x != 0)
         .cloned()
         .collect::<Vec<_>>();
 
-    let mut after_happiness = Vec::with_capacity(happiness.len());
+    let mut after_happiness = Vec::with_capacity(n);
     after_happiness.push(0);
-    happiness.iter().enumerate().rev().fold(0, |acc, (i, c)| {
-        let a = acc + *c * (i as i64 + 2);
-        after_happiness.push(a);
-        a
-    });
-    after_happiness.reverse();
 
-    let mut before_happiness = Vec::with_capacity(happiness.len());
+    let mut before_happiness = Vec::with_capacity(n);
     before_happiness.push(0);
-    happiness.iter().enumerate().fold(0, |acc, (i, c)| {
-        let a = acc + *c * (i as i64 + 1);
-        before_happiness.push(a);
-        a
-    });
+
+    for i in 0..n - 1 {
+        after_happiness.push(after_happiness[i] + happiness[n - i - 2] * (n - i) as i64);
+        before_happiness.push(before_happiness[i] + happiness[i] * (i + 1) as i64);
+    }
 
     let mut max_happiness = i64::min_value();
     let set_max = |x: &mut i64, y: i64| {
@@ -78,11 +72,14 @@ fn solve<R: BufRead>(stdin: &mut R, buffer: &mut String) -> String {
     };
     for i in 0..happiness.len() + 1 {
         if i == 0 {
-            set_max(&mut max_happiness, after_happiness[i]);
+            set_max(&mut max_happiness, after_happiness[happiness.len() - i]);
         } else if i == happiness.len() {
             set_max(&mut max_happiness, before_happiness[i]);
         } else {
-            set_max(&mut max_happiness, before_happiness[i] + after_happiness[i]);
+            set_max(
+                &mut max_happiness,
+                before_happiness[i] + after_happiness[happiness.len() - i],
+            );
         }
     }
 
