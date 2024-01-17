@@ -25,5 +25,25 @@
         "functional": "cpp",
         "regex": "cpp",
         "valarray": "cpp"
-    }
+    },
+    "workbench.colorCustomizations": {
+        "commandCenter.border": "#e7e7e799",
+        "editorGroup.border": "#0170e0",
+        "panel.border": "#0170e0",
+        "sash.hoverBorder": "#0170e0",
+        "sideBar.border": "#0170e0",
+        "statusBar.background": "#0157ad",
+        "statusBar.border": "#0157ad",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#0170e0",
+        "statusBarItem.remoteBackground": "#0157ad",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "tab.activeBorder": "#0170e0",
+        "titleBar.activeBackground": "#0157ad",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.border": "#0157ad",
+        "titleBar.inactiveBackground": "#0157ad99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#0157ad"
 }

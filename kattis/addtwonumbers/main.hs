@@ -1,0 +1,1 @@
+main = interact (\input -> show (sum (map read (words input))))

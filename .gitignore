@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Haskell
+*.hi
+
 # Compiled Object files
 *.slo
 *.lo
@@ -33,7 +36,15 @@
 
 # Used for kattis tests
 *.res
+*.in
+*.ans
 
-# CS output
-bin/
+# Editor
+.fake
+.ionide
+.vs/
+
+# Build
 obj/
+bin/
+target/

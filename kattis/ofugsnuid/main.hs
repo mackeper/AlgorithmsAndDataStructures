@@ -1,0 +1,1 @@
+main = interact (unlines . foldl (\a x -> x : a) [] . tail . lines)
