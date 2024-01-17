@@ -33,3 +33,7 @@
 
 # Used for kattis tests
 *.res
+
+# CS output
+bin/
+obj/

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Benchmark.Benchmark-20210201-140552</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.12.1, OS=ubuntu 18.04
+AMD Ryzen 5 2600X, 1 CPU, 12 logical and 6 physical cores
+.NET Core SDK=3.1.402
+  [Host]     : .NET Core 3.1.8 (CoreCLR 4.700.20.41105, CoreFX 4.700.20.41903), X64 RyuJIT
+  Job-IMXWYV : .NET Core 3.1.8 (CoreCLR 4.700.20.41105, CoreFX 4.700.20.41903), X64 RyuJIT
+</code></pre>
+<pre><code>InvocationCount=1  UnrollFactor=1  
+</code></pre>
+
+<table>
+<thead><tr><th>Method</th><th> N</th><th>   Mean</th><th> Error</th><th>StdDev</th><th>Median</th>
+</tr>
+</thead><tbody><tr><td>testInt</td><td>10</td><td>66.67 ns</td><td>25.64 ns</td><td>72.73 ns</td><td>100.0 ns</td>
+</tr><tr><td>testLong</td><td>10</td><td>69.39 ns</td><td>19.32 ns</td><td>56.36 ns</td><td>100.0 ns</td>
+</tr><tr><td>testInt</td><td>100</td><td>88.37 ns</td><td>11.85 ns</td><td>32.24 ns</td><td>100.0 ns</td>
+</tr><tr><td>testLong</td><td>100</td><td>175.81 ns</td><td>33.14 ns</td><td>94.01 ns</td><td>150.0 ns</td>
+</tr><tr><td>testInt</td><td>1000</td><td>704.26 ns</td><td>45.37 ns</td><td>129.44 ns</td><td>700.0 ns</td>
+</tr><tr><td>testLong</td><td>1000</td><td>1,016.49 ns</td><td>69.24 ns</td><td>200.87 ns</td><td>900.0 ns</td>
+</tr><tr><td>testInt</td><td>10000</td><td>5,578.57 ns</td><td>100.69 ns</td><td>89.26 ns</td><td>5,550.0 ns</td>
+</tr><tr><td>testLong</td><td>10000</td><td>7,926.53 ns</td><td>162.18 ns</td><td>323.89 ns</td><td>7,800.0 ns</td>
+</tr><tr><td>testInt</td><td>100000</td><td>54,443.75 ns</td><td>1,026.96 ns</td><td>1,008.61 ns</td><td>54,100.0 ns</td>
+</tr><tr><td>testLong</td><td>100000</td><td>77,700.00 ns</td><td>1,521.16 ns</td><td>1,923.77 ns</td><td>77,500.0 ns</td>
+</tr><tr><td>testInt</td><td>1000000</td><td>581,842.86 ns</td><td>11,557.94 ns</td><td>16,576.05 ns</td><td>580,100.0 ns</td>
+</tr><tr><td>testLong</td><td>1000000</td><td>900,584.04 ns</td><td>22,644.37 ns</td><td>64,605.67 ns</td><td>893,700.0 ns</td>
+</tr><tr><td>testInt</td><td>10000000</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td>
+</tr><tr><td>testLong</td><td>10000000</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td>
+</tr></tbody></table>
+</body>
+</html>
