@@ -1,0 +1,5 @@
+* exiftool to figure out that the file is an BMP.
+* The header is corrupted
+* Use a hex editor to fix the header
+* The file is cropped
+* Use a hex editor to increase the file height.
