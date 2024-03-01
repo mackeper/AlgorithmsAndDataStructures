@@ -1,0 +1,1 @@
+tshark -r shark2.pcapng -T fields -e dns.qry.name -Y "ip.dst == 18.217.1.57" | sed "/^$/d" | grep -oE "^[^.]*" | uniq | base64 -d

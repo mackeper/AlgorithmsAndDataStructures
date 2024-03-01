@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import shutil
 import sys
@@ -27,22 +28,29 @@ class Language:
 
 
 languages = [
-    Language('Python', 'py', []),
-    Language('C++', 'cpp', []),
-    Language('C', 'c', []),
-    Language('C#', 'cs', []),
-    Language('Haskell', 'hs', []),
     Language(
-        'Rust',
-        'rs',
+        "Python",
+        "py",
         [
-            lambda name, _: os.system(f'cargo new {name}'),
-            lambda name, _: shutil.copy('main.rs', f"{name}/src/main.rs"),
-            lambda name, samples: rust_append_tests(name, samples)
-        ]
+            lambda name, _: os.mkdir(name),
+            lambda name, _: shutil.copy("main.py", f"{name}/main.py"),
+        ],
     ),
-    Language('Scala', 'scala', []),
-    Language('Go', 'go', []),
+    Language("C++", "cpp", []),
+    Language("C", "c", []),
+    Language("C#", "cs", []),
+    Language("Haskell", "hs", []),
+    Language(
+        "Rust",
+        "rs",
+        [
+            lambda name, _: os.system(f"cargo new {name}"),
+            lambda name, _: shutil.copy("main.rs", f"{name}/src/main.rs"),
+            lambda name, samples: rust_append_tests(name, samples),
+        ],
+    ),
+    Language("Scala", "scala", []),
+    Language("Go", "go", []),
 ]
 
 
@@ -57,37 +65,43 @@ mod tests {
    }
 """
     for sample in samples:
-        input = sample.input.replace('\n', '\\n').rstrip('\\n')
-        answer = sample.answer.replace('\n', '\\n').rstrip('\\n')
-        test_cases += '\n'
-        test_cases += '    #[test]\n'
-        test_cases += f'    fn test_{sample.name}() {{\n'
+        input = sample.input.replace("\n", "\\n").rstrip("\\n")
+        answer = sample.answer.replace("\n", "\\n").rstrip("\\n")
+        test_cases += "\n"
+        test_cases += "    #[test]\n"
+        test_cases += f"    fn test_{sample.name}() {{\n"
         test_cases += f'        let mut stdin = "{input}".as_bytes();\n'
-        test_cases += '        let mut buffer = String:: with_capacity(1024);\n'
-        test_cases += f'        assert_eq!(solve( & mut stdin, & mut buffer), "{answer}");\n'
-        test_cases += '    }\n'
+        test_cases += "        let mut buffer = String:: with_capacity(1024);\n"
+        test_cases += (
+            f'        assert_eq!(solve( & mut stdin, & mut buffer), "{answer}");\n'
+        )
+        test_cases += "    }\n"
 
     test_cases += "}"
-    with open(Path(problem_name) / Path('src/main.rs'), 'a+', newline='') as file:
+    with open(Path(problem_name) / Path("src/main.rs"), "a+", newline="") as file:
         file.write(test_cases)
 
 
 def download_samples(problem_name: str) -> List[Sample]:
-    sample_url = f"https://open.kattis.com/problems/{problem_name}/file/statement/samples.zip"
+    sample_url = (
+        f"https://open.kattis.com/problems/{problem_name}/file/statement/samples.zip"
+    )
     response = requests.get(sample_url).content
     test_cases = defaultdict(dict)
     with ZipFile(BytesIO(response)) as zipfile:
         for i in zipfile.filelist:
             data = zipfile.read(i.filename).decode("utf-8")
-            test_cases[i.filename.rsplit('.', 1)[0]][i.filename.rsplit('.', 1)[1]] = data
-    return [Sample(kvp[0], kvp[1]['in'], kvp[1]['ans']) for kvp in test_cases.items()]
+            test_cases[i.filename.rsplit(".", 1)[0]][
+                i.filename.rsplit(".", 1)[1]
+            ] = data
+    return [Sample(kvp[0], kvp[1]["in"], kvp[1]["ans"]) for kvp in test_cases.items()]
 
 
 def write_samples_to_files(problem_name: str, samples: List[Sample]) -> None:
     for sample in samples:
-        with open(Path(problem_name) / Path(sample.name + '.in'), 'w+') as file:
+        with open(Path(problem_name) / Path(sample.name + ".in"), "w+") as file:
             file.write(sample.input)
-        with open(Path(problem_name) / Path(sample.name + '.ans'), 'w+') as file:
+        with open(Path(problem_name) / Path(sample.name + ".ans"), "w+") as file:
             file.write(sample.answer)
 
 
@@ -110,6 +124,5 @@ def main(args: List[str]) -> None:
     setup_problem(language, args[2])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(sys.argv)
-
