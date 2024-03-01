@@ -19,19 +19,25 @@ namespace Kattis
                     return;
 
                 var l = new SortedDictionary<int, int>();
-                for (int i = 0; i < N; i++)
+                for (var i = 0; i < N; i++)
                 {
                     var callData = Array.ConvertAll(tr.ReadLine().Split(' '), s => int.Parse(s));
                     if (!l.ContainsKey(callData[2]))
+                    {
                         l.Add(callData[2], 0);
+                    }
+
                     l[callData[2]] += 1;
 
                     if (!l.ContainsKey(callData[2] + callData[3]))
+                    {
                         l.Add(callData[2] + callData[3], 0);
-                    l[callData[2]+callData[3]] -= 1;
+                    }
+
+                    l[callData[2] + callData[3]] -= 1;
                 }
 
-                for (int i = 0; i < M; i++)
+                for (var i = 0; i < M; i++)
                 {
                     var lastStart = 0;
                     var sum = 0;
@@ -52,9 +58,6 @@ namespace Kattis
             }
         }
 
-        static void Main(string[] args)
-        {
-            Run(Console.In, Console.Out);
-        }
+        public static void Main(string[] _) => Run(Console.In, Console.Out);
     }
 }

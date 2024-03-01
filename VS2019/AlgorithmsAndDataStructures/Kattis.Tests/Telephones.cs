@@ -1,9 +1,8 @@
-using NUnit.Framework;
-
 using Kattis;
+using NUnit.Framework;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Kattis.Tests
 {
