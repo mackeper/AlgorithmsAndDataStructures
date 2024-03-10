@@ -1,13 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ConsoleApp {
+namespace icpcawards {
     public class Program {
         internal static void Main(string[] _) {
-            var a = FastIO.NextUlong();
-            var b = FastIO.NextUlong();
-            Console.WriteLine(a + b);
+            var teams = FastIO.NextInt();
+            var winners = new HashSet<string>();
+            for (var i = 0; i < teams; i++) {
+                var university = FastIO.NextString();
+                var team = FastIO.NextString();
+                if (winners.Contains(university))
+                    continue;
+                winners.Add(university);
+                FastIO.WriteLine($"{university} {team}");
+                if (winners.Count == 12)
+                    break;
+            }
         }
 
         private static class FastIO {

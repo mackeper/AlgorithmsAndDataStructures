@@ -2,12 +2,24 @@
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace ConsoleApp {
+namespace plantingtrees {
     public class Program {
         internal static void Main(string[] _) {
-            var a = FastIO.NextUlong();
-            var b = FastIO.NextUlong();
-            Console.WriteLine(a + b);
+            var seedlings = FastIO.NextInt();
+
+            var trees = new int[seedlings];
+            for (var i = 0; i < seedlings; i++) {
+                trees[i] = FastIO.NextInt();
+            }
+
+            Array.Sort(trees, (a, b) => -a.CompareTo(b));
+
+            var daysLeft = 0;
+            for (var i = 0; i < seedlings; i++) {
+                daysLeft = Math.Max(daysLeft - 1, trees[i]);
+            }
+
+            FastIO.WriteLine((seedlings + daysLeft + 1).ToString());
         }
 
         private static class FastIO {
