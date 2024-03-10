@@ -10,6 +10,7 @@ from typing import Callable, List
 from zipfile import ZipFile
 
 import requests
+import typer
 
 
 @dataclass
@@ -38,7 +39,16 @@ languages = [
     ),
     Language("C++", "cpp", []),
     Language("C", "c", []),
-    Language("C#", "cs", []),
+    Language(
+        "C#",
+        "cs",
+        [
+            lambda name, _: os.system("dotnet new console -n " + name),
+            lambda name, _: shutil.copy("Program.cs", f"{name}/Program.cs"),
+            lambda name, _: cs_change_namespace(name, f"{name}/Program.cs"),
+            lambda name, _: shutil.copy("template.csproj", f"{name}/{name}.csproj"),
+        ],
+    ),
     Language("Haskell", "hs", []),
     Language(
         "Rust",
@@ -52,6 +62,14 @@ languages = [
     Language("Scala", "scala", []),
     Language("Go", "go", []),
 ]
+
+
+def cs_change_namespace(problem_name: str, file_path: str) -> None:
+    with open(Path(file_path), "r") as file:
+        data = file.read()
+    data = data.replace("ConsoleApp", problem_name)
+    with open(Path(file_path), "w") as file:
+        file.write(data)
 
 
 def rust_append_tests(problem_name: str, samples: List[Sample]) -> None:
@@ -107,22 +125,28 @@ def write_samples_to_files(problem_name: str, samples: List[Sample]) -> None:
 
 def setup_problem(language: Language, problem_name: str) -> None:
     samples = download_samples(problem_name)
-    [f(problem_name, samples) for f in language.setup]
+    for setup_function in language.setup:
+        setup_function(problem_name, samples)
     write_samples_to_files(problem_name, samples)
 
 
-def main(args: List[str]) -> None:
-    if len(args) != 3:
-        print("Usage: new <language> <problem name>")
-        return
+def main(language: str, problem_name: str) -> None:
+    language = next(
+        (
+            x
+            for x in languages
+            if x.name.lower() == language.lower()
+            or x.extension.lower() == language.lower()
+        ),
+        None,
+    )
 
-    language = next((x for x in languages if x.name.lower() == args[1].lower()), None)
     if language is None:
-        print(f"Language {args[1]} not found")
+        print(f"Language {language} not found")
         return
 
-    setup_problem(language, args[2])
+    setup_problem(language, problem_name)
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    typer.run(main)

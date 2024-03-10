@@ -26,12 +26,12 @@ namespace jackpot {
         [DllImport("libc")] public static extern char getchar_unlocked();
         [DllImport("libc")] public static extern char putchar_unlocked(char c);
 
-        private readonly static StringBuilder sb = new StringBuilder();
+        private static readonly StringBuilder sb = new StringBuilder();
         public static string Next(Func<char, bool> predicate) {
-            sb.Clear();
+            _ = sb.Clear();
             char c;
             while (predicate(c = getchar_unlocked()))
-                sb.Append(c);
+                _ = sb.Append(c);
             return sb.ToString();
         }
 
@@ -41,19 +41,19 @@ namespace jackpot {
         public static long NextLong() => long.Parse(Next(c => { return 48 <= c && c <= 57; }));
         public static ulong NextUlong() => ulong.Parse(Next(c => { return 48 <= c && c <= 57; }));
         public static string ReadLine() => Next(c => { return c != 10; });
-        public static void WriteLine(string s) { Write(s); putchar_unlocked((char)10); }
-        public static void Write(string s) { foreach (var c in s) putchar_unlocked(c); }
+        public static void WriteLine(string s) { Write(s); _ = putchar_unlocked((char)10); }
+        public static void Write(string s) { foreach (var c in s) _ = putchar_unlocked(c); }
     }
 
     public static class CPMath {
-        static ulong gcf(ulong a, ulong b) {
+        public static ulong gcf(ulong a, ulong b) {
             while (b != 0) {
-                ulong temp = b;
+                var temp = b;
                 b = a % b;
                 a = temp;
             }
             return a;
         }
-        public static ulong lcm(ulong a, ulong b) => (a / gcf(a, b)) * b;
+        public static ulong lcm(ulong a, ulong b) => a / gcf(a, b) * b;
     }
 }

@@ -10,9 +10,16 @@ insert_final_newline = true
 charset = utf-8-bom
 
 ###############################
-# .NET Coding Conventions     #
+# Ignore                      #
 ###############################
 [*.{cs,vb}]
+# ToString / Parse may vary by culture
+dotnet_diagnostic.CA1305.severity = none
+# Use LibraryImport instead of DllImport
+dotnet_diagnostic.SYSLIB1054.severity = none
+###############################
+# .NET Coding Conventions     #
+###############################
 # Organize usings
 dotnet_sort_system_directives_first = true
 # this. preferences
@@ -27,7 +34,7 @@ dotnet_style_predefined_type_for_member_access = true:silent
 dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:silent
 dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:silent
 dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
-dotnet_style_parentheses_in_other_operators = never_if_unnecessary:silent
+dotnet_style_parentheses_in_other_operators = always_for_clarity:silent
 # Modifier preferences
 dotnet_style_require_accessibility_modifiers = for_non_interface_members:silent
 dotnet_style_readonly_field = true:suggestion
@@ -79,7 +86,7 @@ csharp_style_conditional_delegate_call = true:suggestion
 # Modifier preferences
 csharp_preferred_modifier_order = public,private,protected,internal,file,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,required,volatile,async:suggestion
 # Expression-level preferences
-csharp_prefer_braces = true:silent
+csharp_prefer_braces = false:silent
 csharp_style_deconstructed_variable_declaration = true:silent
 csharp_prefer_simple_default_expression = true:silent
 csharp_style_prefer_local_over_anonymous_function = true:silent

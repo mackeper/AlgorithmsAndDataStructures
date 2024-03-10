@@ -5,9 +5,10 @@ using Xunit;
 namespace sangbok {
     public class Program {
         internal static void Main(string[] _) {
-            var a = FastIO.NextUlong();
-            var b = FastIO.NextUlong();
-            Console.WriteLine(a + b);
+            var minutes = FastIO.NextUlong();
+            var songes = FastIO.NextUlong();
+
+
         }
 
         // Have not yet figured out how to test console input/output
