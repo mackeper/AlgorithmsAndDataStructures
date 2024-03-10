@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 import shutil
-import sys
 from collections import defaultdict
 from dataclasses import dataclass
 from io import BytesIO
@@ -46,6 +45,8 @@ languages = [
             lambda name, _: os.system("dotnet new console -n " + name),
             lambda name, _: shutil.copy("Program.cs", f"{name}/Program.cs"),
             lambda name, _: cs_change_namespace(name, f"{name}/Program.cs"),
+            lambda name, _: shutil.copy("Tests.cs", f"{name}/Tests.cs"),
+            lambda name, _: cs_change_namespace(name, f"{name}/Tests.cs"),
             lambda name, _: shutil.copy("template.csproj", f"{name}/{name}.csproj"),
         ],
     ),

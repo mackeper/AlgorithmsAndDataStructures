@@ -1,6 +1,5 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
-using Xunit;
 
 namespace sangbok {
     public class Program {
@@ -9,16 +8,6 @@ namespace sangbok {
             var b = FastIO.NextUlong();
             Console.WriteLine(a + b);
         }
-
-        // Have not yet figured out how to test console input/output
-        // with getchar_unlocked and putchar_unlocked
-        [Fact]
-        public static void TestMethod() {
-            var a = 1;
-            var b = 2;
-            Assert.Equal(3, a + b);
-        }
-
 
         private static class FastIO {
             [DllImport("libc")] internal static extern char getchar_unlocked();

@@ -1,25 +1,31 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
-using Xunit;
 
 namespace sangbok {
     public class Program {
         internal static void Main(string[] _) {
-            var minutes = FastIO.NextUlong();
-            var songes = FastIO.NextUlong();
+            var seconds = FastIO.NextInt() * 60;
+            var songs = FastIO.NextInt();
 
+            var songDurations = new int[songs];
+            for (var i = 0; i < songs; i++) {
+                songDurations[i] = FastIO.NextInt();
+            }
 
+            Array.Sort(songDurations);
+
+            var singingTime = 0;
+            foreach (var songDuration in songDurations) {
+                if (singingTime + songDuration >= seconds) {
+                    break;
+                }
+                singingTime += songDuration;
+            }
+
+            FastIO.WriteLine(singingTime.ToString());
         }
-
-        // Have not yet figured out how to test console input/output
-        // with getchar_unlocked and putchar_unlocked
-        [Fact]
-        public static void TestMethod() {
-            var a = 1;
-            var b = 2;
-            Assert.Equal(3, a + b);
-        }
-
 
         private static class FastIO {
             [DllImport("libc")] internal static extern char getchar_unlocked();
