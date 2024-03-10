@@ -35,12 +35,12 @@ namespace jackpot {
             return sb.ToString();
         }
 
-        public static string NextString() => Next(c => { return (int)c != 10 && (int)c != 32; });
-        public static int NextInt() => int.Parse(Next(c => { return 48 <= (int)c && (int)c <= 57; }));
-        public static uint NextUint() => uint.Parse(Next(c => { return 48 <= (int)c && (int)c <= 57; }));
-        public static long NextLong() => long.Parse(Next(c => { return 48 <= (int)c && (int)c <= 57; }));
-        public static ulong NextUlong() => ulong.Parse(Next(c => { return 48 <= (int)c && (int)c <= 57; }));
-        public static string ReadLine() => Next(c => { return (int)c != 10; });
+        public static string NextString() => Next(c => { return c != 10 && c != 32; });
+        public static int NextInt() => int.Parse(Next(c => { return 48 <= c && c <= 57; }));
+        public static uint NextUint() => uint.Parse(Next(c => { return 48 <= c && c <= 57; }));
+        public static long NextLong() => long.Parse(Next(c => { return 48 <= c && c <= 57; }));
+        public static ulong NextUlong() => ulong.Parse(Next(c => { return 48 <= c && c <= 57; }));
+        public static string ReadLine() => Next(c => { return c != 10; });
         public static void WriteLine(string s) { Write(s); putchar_unlocked((char)10); }
         public static void Write(string s) { foreach (var c in s) putchar_unlocked(c); }
     }
