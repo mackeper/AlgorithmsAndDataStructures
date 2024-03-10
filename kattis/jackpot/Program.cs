@@ -1,43 +1,36 @@
 ﻿using System;
-using System.IO;
-using System.Text;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Text;
 
-namespace jackpot
-{
-    class Program
-    {
-        
-
-        static void Main(string[] args)
-        {
+namespace jackpot {
+    public class Program {
+        public static void Main(string[] _) {
             var N = FastIO.NextUlong();
-            while(N-- > 0)
-            {
+            while (N-- > 0) {
                 var wheels = FastIO.NextUlong();
                 var p = FastIO.NextUlong();
-                while(--wheels > 0)
-                    p = lcm(p, FastIO.NextUlong());
-                if (p > 1000000000)
+                while (--wheels > 0) {
+                    p = CPMath.lcm(p, FastIO.NextUlong());
+                }
+                if (p > 1000000000) {
                     FastIO.WriteLine("More than a billion.");
-                else
+                } else {
                     FastIO.WriteLine(p.ToString());
+                }
+
             }
         }
     }
-    
-    public static class FastIO
-    {
+
+    public static class FastIO {
         [DllImport("libc")] public static extern char getchar_unlocked();
         [DllImport("libc")] public static extern char putchar_unlocked(char c);
 
-        static StringBuilder sb = new StringBuilder();
-        public static string Next(Func<char, bool> predicate)
-        {
+        private readonly static StringBuilder sb = new StringBuilder();
+        public static string Next(Func<char, bool> predicate) {
             sb.Clear();
             char c;
-            while(predicate(c = getchar_unlocked()))
+            while (predicate(c = getchar_unlocked()))
                 sb.Append(c);
             return sb.ToString();
         }
@@ -51,19 +44,16 @@ namespace jackpot
         public static void WriteLine(string s) { Write(s); putchar_unlocked((char)10); }
         public static void Write(string s) { foreach (var c in s) putchar_unlocked(c); }
     }
-    
-    public static class CPMath
-    {
-        static ulong gcf(ulong a, ulong b)
-        {
-            while (b != 0)
-            {
+
+    public static class CPMath {
+        static ulong gcf(ulong a, ulong b) {
+            while (b != 0) {
                 ulong temp = b;
                 b = a % b;
                 a = temp;
             }
             return a;
         }
-        static ulong lcm(ulong a, ulong b) => (a / gcf(a, b)) * b;
+        public static ulong lcm(ulong a, ulong b) => (a / gcf(a, b)) * b;
     }
 }
