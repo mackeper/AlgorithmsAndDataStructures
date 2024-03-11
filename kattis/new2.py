@@ -10,6 +10,7 @@ from zipfile import ZipFile
 
 import requests
 import typer
+from typing_extensions import Annotated
 
 
 @dataclass
@@ -23,8 +24,12 @@ class Sample:
 class Language:
     name: str
     extension: str
-    # annotate as function
     setup: List[Callable[str, None]]
+
+
+app = typer.Typer(
+    no_args_is_help=True, context_settings={"help_option_names": ["-h", "--help"]}
+)
 
 
 languages = [
@@ -36,8 +41,16 @@ languages = [
             lambda name, _: shutil.copy("main.py", f"{name}/main.py"),
         ],
     ),
-    Language("C++", "cpp", []),
-    Language("C", "c", []),
+    Language(
+        "C++",
+        "cpp",
+        [
+            lambda name, _: os.mkdir(name),
+            lambda name, _: shutil.copy("main.cpp", f"{name}/main.cpp"),
+            lambda name, _: shutil.copy("Makefile", f"{name}/Makefile"),
+        ],
+    ),
+    # Language("C", "c", []),
     Language(
         "C#",
         "cs",
@@ -50,7 +63,7 @@ languages = [
             lambda name, _: shutil.copy("template.csproj", f"{name}/{name}.csproj"),
         ],
     ),
-    Language("Haskell", "hs", []),
+    # Language("Haskell", "hs", []),
     Language(
         "Rust",
         "rs",
@@ -60,13 +73,20 @@ languages = [
             lambda name, samples: rust_append_tests(name, samples),
         ],
     ),
-    Language("Scala", "scala", []),
-    Language("Go", "go", []),
+    # Language("Scala", "scala", []),
+    Language(
+        "Go",
+        "go",
+        [
+            lambda name, _: os.mkdir(name),
+            lambda name, _: shutil.copy("main.go", f"{name}/main.go"),
+        ],
+    ),
 ]
 
 
 def cs_change_namespace(problem_name: str, file_path: str) -> None:
-    with open(Path(file_path), "r") as file:
+    with open(Path(file_path), "Makefile") as file:
         data = file.read()
     data = data.replace("ConsoleApp", problem_name)
     with open(Path(file_path), "w") as file:
@@ -131,7 +151,31 @@ def setup_problem(language: Language, problem_name: str) -> None:
     write_samples_to_files(problem_name, samples)
 
 
-def main(language: str, problem_name: str) -> None:
+@app.command()
+def add_samples(
+    problem_name: Annotated[str, typer.Argument(help="Name of the problem")]
+) -> None:
+    """Add samples to an existing problem"""
+    if not os.path.exists(problem_name):
+        print(f"Problem '{problem_name}' not found")
+        return
+    samples = download_samples(problem_name)
+    write_samples_to_files(problem_name, samples)
+
+
+@app.command()
+def list_languages() -> None:
+    """List all available languages"""
+    for language in languages:
+        print(f"{language.name} - {language.extension}")
+
+
+@app.command()
+def new(
+    language: Annotated[str, typer.Argument(help="Name of the programming language")],
+    problem_name: Annotated[str, typer.Argument(help="Name of the problem")],
+) -> None:
+    """Setup a new problem"""
     language = next(
         (
             x
@@ -149,5 +193,15 @@ def main(language: str, problem_name: str) -> None:
     setup_problem(language, problem_name)
 
 
+@app.callback()
+def main() -> None:
+    """Kattis tool
+
+    You find the problem name in the URL of the problem on open.kattis.com/problems/PROBLEM_NAME
+    """
+    pass
+
+
 if __name__ == "__main__":
-    typer.run(main)
+    # typer.run(main)
+    app()
