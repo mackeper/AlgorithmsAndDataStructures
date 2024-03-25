@@ -86,7 +86,7 @@ languages = [
 
 
 def cs_change_namespace(problem_name: str, file_path: str) -> None:
-    with open(Path(file_path), "Makefile") as file:
+    with open(Path(file_path), "r") as file:
         data = file.read()
     data = data.replace("ConsoleApp", problem_name)
     with open(Path(file_path), "w") as file:
