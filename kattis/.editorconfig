@@ -19,6 +19,8 @@ dotnet_diagnostic.CA1305.severity = none
 dotnet_diagnostic.SYSLIB1054.severity = none
 # Expression is never used
 dotnet_diagnostic.IDE0058.severity = none
+# Remove underscores from member names
+dotnet_diagnostic.CA1707.severity = none
 ###############################
 # .NET Coding Conventions     #
 ###############################
@@ -68,6 +70,8 @@ dotnet_naming_symbols.constant_fields.required_modifiers          = const
 # C# Coding Conventions       #
 ###############################
 [*.cs]
+# Namespace preferences
+csharp_style_namespace_declarations = file_scoped:warning
 # var preferences
 csharp_style_var_for_built_in_types = true:suggestion
 csharp_style_var_when_type_is_apparent = true:suggestion

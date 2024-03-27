@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using Algorithms;
+using Graph = DataStructures.Graph<int, int>;
 
 namespace buildinghighways {
     public class Program {
@@ -13,13 +16,17 @@ namespace buildinghighways {
             }
 
             // Build the graph
-            var graph = new int[n, n];
+            var graph = new Graph();
             for (var i = 0; i < n; i++) {
                 for (var j = 0; j < n; j++) {
-                    graph[i, j] = cities[i] + cities[j];
+                    graph.AddBidirectionalEdge(i, j, Math.Abs(cities[i] + cities[j]));
                 }
             }
 
+            // Find the minimum spanning tree
+            var mst = Kruskal.MST(graph);
+
+            Console.WriteLine(mst.Edges.Sum(edge => edge.Weight));
         }
 
         private static class FastIO {

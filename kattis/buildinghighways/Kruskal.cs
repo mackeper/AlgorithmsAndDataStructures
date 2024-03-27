@@ -5,9 +5,6 @@ using Graph = DataStructures.Graph<int, int>;
 namespace Algorithms;
 
 public class Kruskal {
-    /** Kruskal's algorithm to find the minimum spanning tree of a graph.
-     * Time complexity: O(E log V)
-     */
     public static Graph MST(Graph graph) {
         var mst = new Graph();
         var disjointSet = new DisjointSet(graph.Size + 1);

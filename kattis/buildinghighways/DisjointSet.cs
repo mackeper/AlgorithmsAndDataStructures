@@ -1,25 +1,35 @@
-﻿
-namespace DataStructures {
-    /** DisjointSet
-     * (Also knowns as UnionFind
-     */
-    public class DisjointSet {
+﻿using System.Linq;
 
-        private readonly int[] parent;
+namespace DataStructures;
 
-        public DisjointSet(int n) {
-            parent = new int[n];
+/** DisjointSet (Also knowns as UnionFind) */
+public class DisjointSet(int n) {
+
+    private readonly int[] parent = Enumerable.Range(0, n).ToArray();
+    private readonly int[] rank = new int[n];
+
+    public int Find(int x) {
+        while (x != parent[x]) {
+            parent[x] = parent[parent[x]];
+            x = parent[x];
         }
+        return x;
+    }
 
-        public int Find(int x) {
-            if (parent[x] == x)
-                return x;
+    public void Union(int x, int y) {
+        var px = Find(x);
+        var py = Find(y);
 
-            return Find(parent[x]);
-        }
+        if (px == py)
+            return;
 
-        public void Union(int x, int y) {
-            parent[Find(x)] = Find(y);
+        if (rank[px] > rank[py])
+            parent[py] = px;
+        else if (rank[px] < rank[py])
+            parent[px] = py;
+        else {
+            rank[px]++;
+            parent[py] = px;
         }
     }
 }
