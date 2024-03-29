@@ -6,6 +6,6 @@ public class Prims {
     public static Graph MST(Graph graph) {
         var mst = new Graph();
         var visited = new bool[graph.Size];
-
+        return mst;
     }
 }
