@@ -30,7 +30,7 @@ public class GraphTests {
     }
 
     [Fact]
-    public void GetNeighbors_Should_ReturnEmptyList_When_NodeDoesNotExist() {
+    public void GetNeighbors_Should_ReturnEmptyList_When_VertexDoesNotExist() {
         var graph = new Graph<int, int>();
         Assert.Empty(graph.GetNeighbors(1));
     }
@@ -50,7 +50,7 @@ public class GraphTests {
     }
 
     [Fact]
-    public void Size_Should_ReturnNumberOfNodes() {
+    public void Size_Should_ReturnNumberOfVertices() {
         var graph = new Graph<int, int>();
         graph.AddBidirectionalEdge(1, 2, 3);
         graph.AddBidirectionalEdge(1, 3, 4);
@@ -58,17 +58,17 @@ public class GraphTests {
     }
 
     [Fact]
-    public void Nodes_Should_ReturnEmptyList_When_GraphIsEmpty() {
+    public void Vertices_Should_ReturnEmptyList_When_GraphIsEmpty() {
         var graph = new Graph<int, int>();
-        Assert.Empty(graph.Nodes);
+        Assert.Empty(graph.Vertices);
     }
 
     [Fact]
-    public void Nodes_Should_ReturnNodes() {
+    public void Vertices_Should_ReturnVertices() {
         var graph = new Graph<int, int>();
         graph.AddBidirectionalEdge(1, 2, 3);
         graph.AddBidirectionalEdge(1, 3, 4);
-        Assert.Equal([1, 2, 3], graph.Nodes);
+        Assert.Equal([1, 2, 3], graph.Vertices);
     }
 
     [Fact]
