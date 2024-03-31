@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
-using Algorithms;
-using Graph = DataStructures.Graph<int, int>;
+using PriorityQueue = System.Collections.Generic.PriorityQueue<int, int>;
 
 namespace buildinghighways {
+
     public class Program {
         internal static void Main(string[] _) {
             // Read input
@@ -15,18 +15,31 @@ namespace buildinghighways {
                 cities[i] = FastIO.NextInt();
             }
 
-            // Build the graph
-            var graph = new Graph();
-            for (var i = 0; i < n; i++) {
-                for (var j = 0; j < n; j++) {
-                    graph.AddBidirectionalEdge(i, j, Math.Abs(cities[i] + cities[j]));
+            // prim's algorithm
+            var visited = new HashSet<int>();
+            var queue = new PriorityQueue();
+            var mstWeight = 0;
+
+            queue.Enqueue(0, 0);
+            while (queue.Count > 0 && visited.Count < n) {
+                queue.TryDequeue(out var vertex, out var weight);
+                if (visited.Contains(vertex)) {
+                    continue;
+                }
+
+                visited.Add(vertex);
+                mstWeight += weight;
+
+                for (var i = 0; i < n; i++) {
+                    if (visited.Contains(i)) {
+                        continue;
+                    }
+
+                    queue.Enqueue(i, Math.Abs(cities[vertex] + cities[i]));
                 }
             }
 
-            // Find the minimum spanning tree
-            var mst = Prim.MST(graph);
-
-            Console.WriteLine(mst.Edges.Sum(edge => edge.Weight));
+            FastIO.WriteLine(mstWeight.ToString());
         }
 
         private static class FastIO {

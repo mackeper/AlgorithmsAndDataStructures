@@ -12,7 +12,9 @@ public class Prim {
         var queue = new PriorityQueue();
         var firstVertex = graph.Vertices[0];
         visited.Add(firstVertex);
-        graph.GetNeighbors(firstVertex).ForEach(edge => queue.Enqueue(edge, edge.Weight));
+        foreach (var edge in graph.GetNeighbors(firstVertex)) {
+            queue.Enqueue(edge, edge.Weight);
+        }
 
         while (queue.Count > 0) {
             var edge = queue.Dequeue();
@@ -22,16 +24,16 @@ public class Prim {
             }
 
             mst.AddEdge(edge);
-
             visited.Add(edge.Destination);
 
-            graph.GetNeighbors(edge.Destination).ForEach(e => {
-                if (!visited.Contains(e.Destination)) {
-                    queue.Enqueue(e, e.Weight);
-                }
-            });
+            foreach (var vertex in visited) {
+                graph.GetNeighbors(vertex).ForEach(e => {
+                    if (!visited.Contains(e.Destination)) {
+                        queue.Enqueue(e, e.Weight);
+                    }
+                });
+            }
         }
-
 
         return mst;
     }
