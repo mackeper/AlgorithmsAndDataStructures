@@ -10,7 +10,7 @@ public class Prim {
         var visited = new HashSet<int>();
 
         var queue = new PriorityQueue();
-        var firstVertex = graph.Vertices[0];
+        var firstVertex = graph.Nodes[0];
         visited.Add(firstVertex);
         graph.GetNeighbors(firstVertex).ForEach(edge => queue.Enqueue(edge, edge.Weight));
 

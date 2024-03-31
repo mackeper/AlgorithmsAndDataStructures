@@ -24,7 +24,7 @@ namespace buildinghighways {
             }
 
             // Find the minimum spanning tree
-            var mst = Kruskal.MST(graph);
+            var mst = Prim.MST(graph);
 
             Console.WriteLine(mst.Edges.Sum(edge => edge.Weight));
         }
