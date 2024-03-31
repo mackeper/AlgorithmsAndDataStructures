@@ -1,44 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using PriorityQueue = System.Collections.Generic.PriorityQueue<int, int>;
 
 namespace buildinghighways {
-
     public class Program {
         internal static void Main(string[] _) {
             // Read input
-            var n = FastIO.NextInt();
-            var cities = new int[n];
-            for (var i = 0; i < n; i++) {
-                cities[i] = FastIO.NextInt();
+            var n = FastIO.NextUlong();
+            var cities = new ulong[n];
+            for (var i = 0UL; i < n; i++) {
+                cities[i] = FastIO.NextUlong();
             }
 
-            // prim's algorithm
-            var visited = new HashSet<int>();
-            var queue = new PriorityQueue();
-            var mstWeight = 0;
+            // find min city
+            var minCity = cities.Min();
+            var mstWeight = cities.Aggregate(0UL, (a, c) => a + c + minCity) - (minCity * 2UL);
 
-            queue.Enqueue(0, 0);
-            while (queue.Count > 0 && visited.Count < n) {
-                queue.TryDequeue(out var vertex, out var weight);
-                if (visited.Contains(vertex)) {
-                    continue;
-                }
-
-                visited.Add(vertex);
-                mstWeight += weight;
-
-                for (var i = 0; i < n; i++) {
-                    if (visited.Contains(i)) {
-                        continue;
-                    }
-
-                    queue.Enqueue(i, Math.Abs(cities[vertex] + cities[i]));
-                }
-            }
-
+            // Output
             FastIO.WriteLine(mstWeight.ToString());
         }
 
