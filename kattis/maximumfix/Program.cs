@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -10,8 +8,9 @@ namespace maximumfix {
             var n = FastIO.NextInt();
             var rotations = new int[n];
 
+            var values = FastIO.ReadLine().Split(' ');
             for (var i = 1; i <= n; i++) {
-                var value = FastIO.NextInt();
+                var value = int.Parse(values[i - 1]);
                 var rotation = i - value;
                 if (rotation < 0)
                     rotation += n;
@@ -20,12 +19,13 @@ namespace maximumfix {
 
             var maxFix = 0;
             var maxRotations = 0;
-            foreach (var rotation in rotations) {
-                if (rotation.Value > maxFix) {
-                    maxFix = rotation.Value;
-                    maxRotations = rotation.Key;
-                } else if (rotation.Value == maxFix && rotation.Key < maxRotations) {
-                    maxRotations = rotation.Key;
+            for (var rotation = 0; rotation < n; rotation++) {
+                var fix = rotations[rotation];
+                if (fix > maxFix) {
+                    maxFix = fix;
+                    maxRotations = rotation;
+                } else if (fix == maxFix && rotation < maxRotations) {
+                    maxRotations = rotation;
                 }
             }
 
